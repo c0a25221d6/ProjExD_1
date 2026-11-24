@@ -9,38 +9,16 @@ def main():
     pg.display.set_caption("はばたけ！こうかとん")
     screen = pg.display.set_mode((800, 600))
     clock  = pg.time.Clock()
-
     bg_img = pg.image.load("fig/pg_bg.jpg")
-    bg_img_r = pg.transform.flip(bg_img, True, False)
-
-    kk_img = pg.image.load("fig/3.png")
-    kk_img = pg.transform.rotate(kk_img, 0)
-    kk_rct = kk_img.get_rect()
-    kk_rct.center = (300, 200)
-
     tmr = 0
+    kk_img = pg.image.load("fig/3.png")
+    kk_img = pg.transform.flip(kk_img, True, False)
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        key_lst = pg.key.get_pressed()
-        sum_mv = [0, 0]
-        if key_lst[pg.K_UP]:
-            sum_mv[1] -= 1
-        if key_lst[pg.K_DOWN]:
-            sum_mv[1] += 1
-        if key_lst[pg.K_LEFT]:
-            sum_mv[0] -= 1
-        if key_lst[pg.K_RIGHT]:
-            sum_mv[0] += 1
-        kk_rct.move_ip(sum_mv)
-
-        x = tmr % 3200
-        screen.blit(bg_img, [-x, 0])
-        screen.blit(bg_img_r, [-x + 1600, 0])
-        screen.blit(bg_img, [-x + 3200, 0])
-        screen.blit(kk_img, kk_rct)
-
+        screen.blit(bg_img, [0, 0])
+        screen.blit(kk_img, [300, 200])
         pg.display.update()
         tmr += 1        
         clock.tick(10)
